@@ -24,4 +24,7 @@ RUN git clone https://github.com/mininet/openflow.git /tmp/openflow && \
     cd /tmp/openflow && ./boot.sh && ./configure && make && make install && \
     rm -rf /tmp/openflow
 
+RUN mkdir /home/mininet
+WORKDIR /home/mininet
+
 CMD ["bash"]

@@ -1,0 +1,7 @@
+docker-compose up --build -d
+
+docker-compose up --build --no-cache -d
+
+docker exec -it mininet bash          
+
+docker exec -it pox  bash

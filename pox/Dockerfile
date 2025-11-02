@@ -13,4 +13,5 @@ RUN git clone https://github.com/noxrepo/pox.git /pox
 
 WORKDIR /pox
 
-CMD ["python3", "pox.py", "forwarding.l2_learning"]
+# CMD ["python3", "pox.py", "forwarding.l2_learning"]
+CMD ["bash"]

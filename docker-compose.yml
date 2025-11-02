@@ -4,11 +4,15 @@ services:
   pox:
     build: ./pox
     container_name: pox
-    command: python3 /pox/pox.py forwarding.l2_learning
+    tty: true
+    stdin_open: true
+    # command: python3 /pox/pox.py forwarding.l2_learning
     ports:
       - "6633:6633" # Port OpenFlow
     networks:
       - sdn-net
+    volumes:
+      - ./pox/ext:/pox/ext  
 
   mininet:
     build: ./mininet
@@ -20,6 +24,8 @@ services:
       - sdn-net
     depends_on:
       - pox
+    volumes:
+      - ./mininet:/home/mininet  
     # command: bash -c "mn --switch user --controller=remote,ip=pox --topo=single,3 && bash"
 
 networks:
