@@ -13,5 +13,8 @@ RUN git clone https://github.com/noxrepo/pox.git /pox
 
 WORKDIR /pox
 
+# Copie les script pox dans /pox
+COPY ./scripts/ /pox
+
 # CMD ["python3", "pox.py", "forwarding.l2_learning"]
 CMD ["bash"]
