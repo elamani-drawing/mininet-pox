@@ -17,9 +17,6 @@ def _handle_PacketIn(event):
             log.info("ARP REQUEST: %s => %s (from %s)" % (a.protosrc, a.protodst, packet.src))
         elif a.opcode == arp.REPLY:
             log.info("ARP REPLY: %s is-at %s" % (a.protosrc, a.hwsrc))
-        # Exemple de détection simple: multiple HW addresses pour même IP
-        # (ici on stocke / compare dans un dict très simple)
-        # --> implémenter plus robuste pour le projet
 
 def launch():
     core.openflow.addListenerByName("PacketIn", _handle_PacketIn)
