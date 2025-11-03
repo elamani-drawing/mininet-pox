@@ -14,3 +14,5 @@ tu peux:  pingall dans mininet
 # autres
 mn --custom custom.py --topo customtopo --controller=remote,ip:172.20.0.2 --switch user --link tc
 python3 pox.py detect
+
+att python3 /home/mininet/mini/att/dos_syn_flood.py srv 80 att-eth0 > /tmp/syn_flood.log 2>&1 &

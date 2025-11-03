@@ -46,49 +46,51 @@ class TwoSubnetTopo(Topo):
         self.addLink(router1, switch1)
         self.addLink(router1, switch2)
 
-def run():
+def create_network(controller_ip='pox', controller_port=6633, start_cli=False):
+    """Crée, configure et démarre le réseau. Retourne l'objet Mininet (net).
+    - controller_ip : adresse du contrôleur OpenFlow (nom docker ou IP)
+    - start_cli : si True, ouvre la CLI automatiquement avant de retourner (utile pour tests automatisés)
+    """
     setLogLevel('info')
-
-    # Créer la topologie
     topo = TwoSubnetTopo()
 
-    # Initialiser Mininet : on passe la classe RemoteController (pour POX)
-    net = Mininet(topo=topo, controller=None, switch=UserSwitch , link=TCLink, autoSetMacs=True)
+    net = Mininet(topo=topo, controller=None, switch=UserSwitch, link=TCLink, autoSetMacs=True)
+    c0 = net.addController('c0', controller=RemoteController, ip=controller_ip, port=controller_port)
 
-    # Ajouter le contrôleur distant (nom resolvable via docker-compose : 'pox-controller')
-    c0 = net.addController('c0', controller=RemoteController, ip='pox', port=6633)
-
-    # Démarrer le réseau
     net.start()
 
-    info('\n*** Configuration des interfaces du routeur (router1)\n')
+    # info('\n*** Configuration des interfaces du routeur (router1)\n')
     r = net.get('router1')
-    # router1-eth0 est connecté à switch1 (sous-réseau 10.0.1.0/24)
-    # router1-eth1 est connecté à switch2 (sous-réseau 10.0.2.0/24)
     r.cmd('ifconfig router1-eth0 10.0.1.1/24 up')
-    r.cmd('ifconfig router1-eth1 10.0.2.1/24 up')   # ajout de la 2ème IP pour le sous-réseau 2
-    # Activer le routage IPv4 sur le routeur
+    r.cmd('ifconfig router1-eth1 10.0.2.1/24 up')
     r.cmd('sysctl -w net.ipv4.ip_forward=1')
 
+
     info('\n*** Configuration des routes par défaut sur les hôtes\n')
-    # Tous les hôtes pointent leur gateway vers l'adresse du router pour leur sous-réseau
     net.get('srv').cmd('ip route add default via 10.0.1.1 dev srv-eth0')
     net.get('tg1').cmd('ip route add default via 10.0.1.1 dev tg1-eth0')
     net.get('tg2').cmd('ip route add default via 10.0.1.1 dev tg2-eth0')
+
 
     net.get('cli1').cmd('ip route add default via 10.0.2.1 dev cli1-eth0')
     net.get('cli2').cmd('ip route add default via 10.0.2.1 dev cli2-eth0')
     net.get('att').cmd('ip route add default via 10.0.2.1 dev att-eth0')
 
+
     info('\n*** Démarrage d\'un serveur HTTP simple sur srv (cible DoS : 10.0.1.10)\n')
     server = net.get('srv')
     server.cmd('python3 -m http.server 80 &')
 
-    info('\n*** Topologie prête — entrée en CLI Mininet (tape "exit" pour quitter)\n')
-    CLI(net)
+    info('\n*** Topologie prête\n')
 
-    info('\n*** Arrêt du réseau\n')
-    net.stop()
+    if start_cli:
+        CLI(net)
+
+    return net
+
+
 
 if __name__ == '__main__':
-    run()
+    net = create_network()
+    CLI(net)
+    net.stop()

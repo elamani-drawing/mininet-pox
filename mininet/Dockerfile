@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     sudo \
     mininet \
+    tcpdump \
     && rm -rf /var/lib/apt/lists/*
 
 # Implémentation OpenFlow mininet
@@ -24,9 +25,10 @@ RUN git clone https://github.com/mininet/openflow.git /tmp/openflow && \
     cd /tmp/openflow && ./boot.sh && ./configure && make && make install && \
     rm -rf /tmp/openflow
 
-RUN pip3 install mininet
+RUN pip3 install mininet scapy netifaces
 
 RUN mkdir /home/mininet
+# COPY ./mini/ /home/mininet
 WORKDIR /home/mininet
 
 CMD ["bash"]

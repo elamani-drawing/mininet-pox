@@ -25,7 +25,7 @@ services:
     depends_on:
       - pox
     volumes:
-      - ./mininet:/home/mininet  
+      - ./mininet:/home/mininet
     # command: bash -c "mn --switch user --controller=remote,ip=pox --topo=single,3 && bash"
 
 networks:

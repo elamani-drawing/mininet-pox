@@ -18,4 +18,4 @@ done
 # Start Open vSwitch (si on utilise un autre switch que user)
 # /usr/share/openvswitch/scripts/ovs-ctl start
 # Lancer Mininet
-python3 topology.py
+python3 -m mini.default
