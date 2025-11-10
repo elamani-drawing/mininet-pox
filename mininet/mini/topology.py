@@ -46,10 +46,11 @@ class TwoSubnetTopo(Topo):
         self.addLink(router1, switch1)
         self.addLink(router1, switch2)
 
-def create_network(controller_ip='pox', controller_port=6633, start_cli=False):
+def create_network(controller_ip='pox', controller_port=6633, start_cli=False, ping_all=True):
     """Crée, configure et démarre le réseau. Retourne l'objet Mininet (net).
     - controller_ip : adresse du contrôleur OpenFlow (nom docker ou IP)
     - start_cli : si True, ouvre la CLI automatiquement avant de retourner (utile pour tests automatisés)
+    - ping_all : si True, effectue un ping de tous les hôtes pour vérifier la connectivité initiale.
     """
     setLogLevel('info')
     topo = TwoSubnetTopo()
@@ -82,6 +83,9 @@ def create_network(controller_ip='pox', controller_port=6633, start_cli=False):
     server.cmd('python3 -m http.server 80 &')
 
     info('\n*** Topologie prête\n')
+
+    if ping_all:
+        net.pingAll()
 
     if start_cli:
         CLI(net)

@@ -31,10 +31,9 @@ def main():
         net = create_network(controller_ip=args.controller)
         att = net.get('att')
 
-        print(f"[*] Lancement ARP spoof : targets={args.targets} spoof={args.spoof} iface={args.iface}")
+        print(f"\n[*] Lancement ARP spoof : targets={args.targets} spoof={args.spoof} iface={args.iface}")
         start_arp_spoof(att, args.targets, args.spoof, iface=args.iface)
-
-        print("\n*** ARP spoof en cours. Ouvre la CLI Mininet pour observer (ex: 'cli1 arp -n', 'srv tcpdump -i srv-eth0 arp').\n")
+    
         CLI(net)
 
     except Exception as e:
