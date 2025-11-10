@@ -17,4 +17,4 @@ for i in {1..60}; do
 done
 
 # Lancer Mininet
-python3 -m mini.demo.dos_http_flood --target srv --port 80 --threads 5 --reqs 100
+python3 -m mini.demo.dos_http_flood --target 10.0.1.10 --port 80 --threads 5 --reqs 100
