@@ -33,7 +33,7 @@ def main():
         print(f"[*] Lancement HTTP flood : target={args.target}:{args.port} threads={args.threads} reqs={args.reqs}")
         start_http_flood(att, target_ip=args.target, port=args.port, threads=args.threads, reqs=args.reqs)
 
-        print("\n*** HTTP flood en cours. Ouvre la CLI Mininet pour observer (ex: 'srv tcpdump -i srv-eth0 tcp port 80').\n")
+        # print("\n*** HTTP flood en cours. Ouvre la CLI Mininet pour observer (ex: 'srv tcpdump -i srv-eth0 tcp port 80').\n")
         CLI(net)
 
     except Exception as e:

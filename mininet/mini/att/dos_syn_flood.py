@@ -15,6 +15,6 @@ def synflood(dst_ip, dst_port, iface):
 
 if __name__ == "__main__":
     if len(sys.argv) < 4:
-        print("Usage: syn_flood.py <target_ip> <port> <iface>")
+        print("Usage: dos_syn_flood.py <target_ip> <port> <iface>")
         sys.exit(1)
     synflood(sys.argv[1], int(sys.argv[2]), sys.argv[3])

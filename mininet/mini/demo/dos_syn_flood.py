@@ -32,7 +32,7 @@ def main():
         print(f"[*] Lancement SYN flood : target={args.target}:{args.port} via iface={args.iface}")
         start_syn_flood(att, target_ip=args.target, port=args.port, iface=args.iface)
 
-        print("\n*** SYN flood en cours. Ouvre la CLI Mininet pour observer (ex: 'srv tcpdump -i srv-eth0 tcp port 80').\n")
+        # print("\n*** SYN flood en cours. Ouvre la CLI Mininet pour observer (ex: 'srv tcpdump -i srv-eth0 tcp port 80').\n")
         CLI(net)
 
     except Exception as e:

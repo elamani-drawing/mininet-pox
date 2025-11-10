@@ -16,7 +16,16 @@ mn --custom custom.py --topo customtopo --controller=remote,ip:172.20.0.2 --swit
 python3 pox.py detect
 
 att python3 /home/mininet/mini/att/dos_syn_flood.py srv 80 att-eth0 > /tmp/syn_flood.log 2>&1 &
-att python3 -m mini.demo.arp_spoof --targets 10.0.2.10,10.0.2.11 --spoof 10.0.2.1 --iface att-eth0 > /tmp/arp_spoof.log 2>&1 &
+att python3 /home/mininet/mini/att/dos_http_flood.py srv 80 20 1000  > /tmp/syn_flood.log 2>&1
+
+srv ss -ltnp | grep :80
+srv ss -ant | grep ':80' | wc -l
+
+dos http 
+
+srv tcpdump -i srv-eth0 port 80
+<!-- srv tcpdump -i srv-eth0 tcp port 80 -->
+
 
 # demo arp
 python3 -m mini.demo.arp_spoof --targets 10.0.2.10,10.0.2.11 --spoof 10.0.2.1 --iface att-eth0 > /tmp/arp_spoof.log 2>&1 &

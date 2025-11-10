@@ -15,7 +15,7 @@ def worker(url, n):
 
 if __name__ == "__main__":
     if len(sys.argv) < 5:
-        print("Usage: http_flood.py <ip> <port> <threads> <req_per_thread>")
+        print("Usage: dos_http_flood.py <ip> <port> <threads> <req_per_thread>")
         sys.exit(1)
 
     ip = sys.argv[1]; port = sys.argv[2]
