@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from mininet.net import Mininet
 from mininet.node import RemoteController, UserSwitch   
 from mininet.link import TCLink
