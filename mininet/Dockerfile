@@ -19,6 +19,9 @@ RUN apt-get update && apt-get install -y \
     mininet \
     tcpdump \
     wget \
+    traceroute \
+    openvswitch-switch \
+    openvswitch-common \
     && rm -rf /var/lib/apt/lists/*
 
 # Implémentation OpenFlow mininet
@@ -32,4 +35,5 @@ RUN mkdir /home/mininet
 # COPY ./mini/ /home/mininet
 WORKDIR /home/mininet
 
-CMD ["bash"]
+# Start OVS automatically when container starts
+ENTRYPOINT ["bash", "/home/mininet/start_ovs.sh"]

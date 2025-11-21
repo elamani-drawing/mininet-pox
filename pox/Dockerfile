@@ -11,6 +11,9 @@ RUN apt-get update && apt-get install -y \
 # Installer POX
 RUN git clone https://github.com/noxrepo/pox.git /pox
 
+
+RUN pip3 install pandas scikit-learn joblib numpy
+
 WORKDIR /pox
 
 # Copie les script pox dans /pox

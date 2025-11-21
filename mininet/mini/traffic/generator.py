@@ -49,12 +49,12 @@ def start_normal_traffic(net):
     processes.append(start_ping_loop(cli1, srv_ip, interval=4))
 
     # Un petit iperf TCP occasionnel depuis tg1 srv pour simuler un trafic "upload" normal)
-    # print("*** Lancement d'un iperf normal tg1 srv (10s)") // Tester apres avoir activer un vrai switch (si request fonctionne on peut enlever iperf)
-    # run_normal_iperf(net, tg1, srv, duration=10)
+    # print("*** Lancement d'un iperf normal tg1 srv (10s)") 
+    run_normal_iperf(net, tg1, srv, duration=10)
 
 
-    print("*** Trafic normal en cours (processus non bloquants).")
-    print("--process", processes)
+    print("*** Trafic normal en cours .")
+    # print("--process", processes)
     return processes
 
 if __name__ == '__main__':

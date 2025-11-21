@@ -13,6 +13,7 @@ services:
       - sdn-net
     volumes:
       - ./pox/ext:/pox/ext  
+      - ./pox/tmp:/tmp/pox/
 
   mininet:
     build: ./mininet

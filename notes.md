@@ -1,6 +1,6 @@
 # lancer les conteneurs
 docker-compose up --build -d
-docker-compose up --build --no-cache -d
+docker-compose build --no-cache -d
 
 # entrer dans les conteneurs
 docker exec -it mininet bash          
@@ -32,5 +32,27 @@ python3 -m mini.demo.arp_spoof --targets 10.0.2.10,10.0.2.11 --spoof 10.0.2.1 --
 att python3 /home/mininet/mini/att/arp_spoof.py  10.0.2.10,10.0.2.11 10.0.2.1 att-eth0 > /tmp/arp_spoof.log 2>&1 &
 att pgrep -af arp_spoof.py
 att kill <PID>
+srv arp -n
 
 att python3 /home/mininet/mini/att/arp_spoof.py  10.0.2.10,10.0.2.11 10.0.2.1 att-eth0 
+
+srv  pgrep -af python
+
+generer un trafic, generer le model,  annalyser le trafic, 
+
+setsid bash -c 'setsid python3 /home/mininet/mini/traffic/client_behavior.py --server 10.0.1.10 --target 10.0.2.10  > /tmp/mixed_behavior.log 2>&1' &
+
+
+trouver pk le server web reste innacessible 
+
+docker ps -a (afficher tout les conteneur)
+docker container prune (supprimer tout les conteneur stopper)
+
+service openvswitch-switch status
+
+ovs-vsctl --version
+mn --topo tree,2 --switch ovsk --controller=remote
+mn --switch ovsk --test pingall
+
+
+ cli1 pgrep -af python

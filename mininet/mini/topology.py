@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from mininet.net import Mininet
-from mininet.node import RemoteController, UserSwitch   
+from mininet.node import RemoteController, OVSSwitch   
 from mininet.link import TCLink
 from mininet.topo import Topo
 from mininet.log import setLogLevel, info
@@ -57,7 +57,7 @@ def create_network(controller_ip='pox', controller_port=6633, start_cli=False, p
     setLogLevel('info')
     topo = TwoSubnetTopo()
 
-    net = Mininet(topo=topo, controller=None, switch=UserSwitch, link=TCLink, autoSetMacs=True)
+    net = Mininet(topo=topo, controller=None, switch=OVSSwitch, link=TCLink, autoSetMacs=True)
     c0 = net.addController('c0', controller=RemoteController, ip=controller_ip, port=controller_port)
 
     net.start()
