@@ -1,9 +1,6 @@
 """
 AnalyticalFirewall POX
-
-Contrôleur OpenFlow type "learning switch" avec fonctions de sécurité :
-
-- Protection ARP : détection de conflits IP-MAC, gratuitous ARP, et blocage immédiat
+- ARP : détection de conflits IP-MAC, gratuitous ARP, et blocage immédiat
   des ARP spoofing pour que la table ARP des hôtes légitimes ne soit jamais corrompue.
 - Rate limiting : détection des MAC envoyant trop de paquets par seconde.
 - Détection DDoS simple : comptage des flux par MAC sur une fenêtre de temps.
