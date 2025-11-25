@@ -29,10 +29,12 @@ srv tcpdump -i srv-eth0 port 80
 
 # demo arp
 python3 -m mini.demo.arp_spoof --targets 10.0.2.10,10.0.2.11 --spoof 10.0.2.1 --iface att-eth0 > /tmp/arp_spoof.log 2>&1 &
-att python3 /home/mininet/mini/att/arp_spoof.py  10.0.2.10,10.0.2.11 10.0.2.1 att-eth0 > /tmp/arp_spoof.log 2>&1 &
+att python3 /home/mininet/mini/att/arp_spoof.py  10.0.2.10 10.0.2.1 att-eth0 > /tmp/arp_spoof.log 2>&1 &
 att pgrep -af arp_spoof.py
 att kill <PID>
 srv arp -n
+
+cli1 ip -s -s neigh flush all
 
 att python3 /home/mininet/mini/att/arp_spoof.py  10.0.2.10,10.0.2.11 10.0.2.1 att-eth0 
 
@@ -55,4 +57,4 @@ mn --topo tree,2 --switch ovsk --controller=remote
 mn --switch ovsk --test pingall
 
 
- cli1 pgrep -af python
+cli1 pgrep -af python

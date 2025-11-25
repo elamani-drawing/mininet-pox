@@ -18,8 +18,8 @@ class TwoSubnetTopo(Topo):
     """
     def build(self):
         # Switches OpenFlow (nom explicite)
-        switch1 = self.addSwitch('switch1')  # switch pour le sous-réseau 1
-        switch2 = self.addSwitch('switch2')  # switch pour le sous-réseau 2
+        switch1 = self.addSwitch('switch1', mac='00:00:00:00:00:01')  # switch pour le sous-réseau 1
+        switch2 = self.addSwitch('switch2', mac='00:00:00:00:00:02')  # switch pour le sous-réseau 2
 
         # Sous-réseau 1 (10.0.1.0/24) : serveur cible + 2 generateurs de trafic
         # On donne des adresses MAC explicites (optionnel)
@@ -33,7 +33,7 @@ class TwoSubnetTopo(Topo):
         att  = self.addHost('att',  ip='10.0.2.20/24', mac='00:00:00:00:02:20')  # attaquant (DoS / ARP spoof)
 
         # Routeur : host utilisé comme routeur (il aura deux interfaces, une par sous-réseau)
-        router1 = self.addHost('router1', ip='10.0.1.1/24')  # on ajoutera la 2ème IP plus bas
+        router1 = self.addHost('router1', ip='10.0.1.1/24', mac='00:00:00:00:03:01')  # on ajoutera la 2ème IP plus bas
 
         # Liens entre hosts et switches
         self.addLink(srv,  switch1)
