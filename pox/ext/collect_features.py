@@ -126,4 +126,4 @@ def _periodic_emit():
 def launch():
     core.openflow.addListenerByName("PacketIn", _handle_PacketIn)
     core.callDelayed(EMIT_INTERVAL, _periodic_emit)
-    log.info("Module POX Collect lancé avec features avancéess.")
+    log.info("Module POX Collect lancé avec features avancées.")

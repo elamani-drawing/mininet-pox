@@ -5,12 +5,16 @@ import joblib
 from collections import defaultdict, deque
 import math
 
-WINDOW_SECONDS = 10.0
+WINDOW_SECONDS = 5.0
 EMIT_INTERVAL = 1.0
 
-FEATURES_CSV = "/tmp/pox/pox_features.csv"
-MODEL_PATH = "/tmp/pox/iforest_model.pkl"
-SCALER_PATH = "/tmp/pox/scaler.pkl"
+DIR_TMP = "/tmp/pox/"
+DIR_FEATURES = DIR_TMP+ "features/"
+DIR_MODELS = DIR_TMP+ "models/"
+
+FEATURES_CSV = DIR_TMP+"pox_features.csv"
+MODEL_PATH = DIR_MODELS+"iforest_model.pkl"
+SCALER_PATH = DIR_MODELS+"scaler.pkl"
 
 
 def now():
