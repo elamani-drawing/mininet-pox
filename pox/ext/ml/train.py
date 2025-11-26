@@ -13,7 +13,7 @@ features = df.drop(["timestamp", "src_ip"], axis=1)
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(features)
 
-# Entraîner Isolation Forest
+# Entraîner Isolation Forest (100 % de trafic normal)
 model = IsolationForest(
     n_estimators=200,
     contamination=0.01,  # taux d'anomalies attendu
@@ -26,4 +26,4 @@ model.fit(X_scaled)
 joblib.dump(model, TMP_DIR+"iforest_model.pkl")
 joblib.dump(scaler, TMP_DIR+"scaler.pkl")
 
-print(f"Model trained and saved in {TMP_DIR}.")
+print(f"Model sauvegardé dans le dossier {TMP_DIR}.")

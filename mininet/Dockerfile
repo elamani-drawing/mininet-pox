@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     mininet \
     tcpdump \
     wget \
+    dos2unix \
     traceroute \
     openvswitch-switch \
     openvswitch-common \
@@ -35,5 +36,5 @@ RUN mkdir /home/mininet
 # COPY ./mini/ /home/mininet
 WORKDIR /home/mininet
 
-# Start OVS automatically when container starts
-ENTRYPOINT ["bash", "/home/mininet/start_ovs.sh"]
+# Convertir tous les fichiers .sh vers Unix et demarre OVS au demarage du conteneur
+ENTRYPOINT ["bash", "-c", "find /home/mininet -type f -name '*.sh' -exec dos2unix {} \\; && bash /home/mininet/start_ovs.sh"]
