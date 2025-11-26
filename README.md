@@ -75,7 +75,7 @@ Pour interagir avec les services, vous pouvez ouvrir un shell à l'intérieur de
 
 ## Lancer les Attaques
 
-Les scripts d'attaque doivent être lancés depuis le conteneur `mininet`.
+Les scripts d'attaque doivent être lancés depuis le conteneur `mininet` avec la cli d'activer et la topologie déployer, par exemple avec `start_mininet.sh`.
 
 ### Attaque DoS - SYN Flood
 
@@ -83,14 +83,14 @@ Ce script lance une attaque par inondation SYN sur le serveur `srv`.
 
 ```bash
 # Depuis le conteneur mininet, sur le nœud 'att'
-python3 /home/mininet/mini/att/dos_syn_flood.py srv 80 att-eth0 > /tmp/syn_flood.log 2>&1 &
+att python3 /home/mininet/mini/att/dos_syn_flood.py srv 80 att-eth0 > /tmp/syn_flood.log 2>&1 &
 ```
 
 Pour observer l'attaque sur le serveur :
 
 ```bash
 # Sur le nœud 'srv'
-tcpdump -i srv-eth0 port 80
+srv tcpdump -i srv-eth0 port 80
 ```
 
 ### Attaque DoS - HTTP Flood
@@ -99,14 +99,14 @@ Ce script lance une attaque par inondation de requêtes HTTP.
 
 ```bash
 # Depuis le conteneur mininet, sur le nœud 'att'
-python3 /home/mininet/mini/att/dos_http_flood.py srv 80 20 1000 > /tmp/http_flood.log 2>&1 &
+att python3 /home/mininet/mini/att/dos_http_flood.py srv 80 20 1000 > /tmp/http_flood.log 2>&1 &
 ```
 
 Pour observer l'impact sur le serveur :
 
 ```bash
 # Sur le nœud 'srv'
-ss -ant | grep ':80' | wc -l
+srv tcpdump -i srv-eth0 port 80
 ```
 
 ### Attaque ARP Spoofing
@@ -115,14 +115,14 @@ Ce script empoisonne le cache ARP des cibles pour rediriger le trafic.
 
 ```bash
 # Depuis le conteneur mininet, sur le nœud 'att'
-python3 /home/mininet/mini/att/arp_spoof.py 10.0.2.10 10.0.2.1 att-eth0 > /tmp/arp_spoof.log 2>&1 &
+att python3 /home/mininet/mini/att/arp_spoof.py 10.0.2.10 10.0.2.1 att-eth0 > /tmp/arp_spoof.log 2>&1 &
 ```
 
 Pour vérifier la table ARP sur une victime (par exemple `cli1` avec l'IP `10.0.2.10`) :
 
 ```bash
 # Sur le nœud 'cli1'
-arp -n
+cli1 arp -n
 ```
 
 ## Démos Automatisées
