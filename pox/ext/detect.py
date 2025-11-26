@@ -17,7 +17,12 @@ def _handle_PacketIn(event):
             log.info("ARP REQUEST: %s => %s (from %s)" % (a.protosrc, a.protodst, packet.src))
         elif a.opcode == arp.REPLY:
             log.info("ARP REPLY: %s is-at %s" % (a.protosrc, a.hwsrc))
-
+    
+    ipv4_pkt = packet.find('ipv4')
+    if ipv4_pkt:
+        log.info("IP PACKET: %s -> %s (proto=%s)" %
+                 (ipv4_pkt.srcip, ipv4_pkt.dstip, ipv4_pkt.protocol))
+        
 def launch():
     core.openflow.addListenerByName("PacketIn", _handle_PacketIn)
     log.info("detect module lancé")

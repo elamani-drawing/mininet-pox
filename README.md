@@ -132,28 +132,29 @@ Il est également possible de lancer une simulation complète (topologie + attaq
 ### ARP Spoof
 
 ```bash
-# Depuis le conteneur mininet
-python3 -m mini.demo.arp_spoof --targets <IP_VICTIME_1>,<IP_VICTIME_2> --spoof <IP_SPOOF> --iface <INTERFACE>
+# Utiliser le fichier .sh
+root@f920a061723e:/home/mininet: ./mini/demo/start_arp_spoof.sh
 ```
-**Exemple :**
+Ou le fichier python correspondant :
 `python3 -m mini.demo.arp_spoof --targets 10.0.2.10,10.0.2.11 --spoof 10.0.2.1 --iface att-eth0`
 
 ### DoS HTTP Flood
 
 ```bash
-# Depuis le conteneur mininet
-python3 -m mini.demo.dos_http_flood --target <IP_CIBLE> --port <PORT_CIBLE> --threads <NB_THREADS> --reqs <NB_REQUETES>
+# Utiliser le fichier .sh
+root@f920a061723e:/home/mininet: ./mini/demo/start_dos_http_flood.sh.sh
 ```
-**Exemple :**
+Ou le fichier python correspondant :
 `python3 -m mini.demo.dos_http_flood --target 10.0.1.10 --port 80 --threads 20 --reqs 1000`
 
 ### DoS SYN Flood
 
 ```bash
-# Depuis le conteneur mininet
-python3 -m mini.demo.dos_syn_flood --target <IP_CIBLE> --port <PORT_CIBLE> --iface <INTERFACE>
+
+# Utiliser le fichier .sh
+root@f920a061723e:/home/mininet: ./mini/demo/start_dos_syn_flood.sh
 ```
-**Exemple :**
+Ou le fichier python correspondant :
 `python3 -m mini.demo.dos_syn_flood --target 10.0.1.10 --port 80 --iface att-eth0`
 
 ## Mécanismes de Défense (Contrôleur POX)

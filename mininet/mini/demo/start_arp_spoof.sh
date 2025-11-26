@@ -17,4 +17,4 @@ for i in {1..60}; do
 done
 
 # Lancer Mininet
-python3 -m mini.demo.arp_spoof --targets 10.0.2.10,10.0.2.11 --spoof 10.0.2.1 --iface att-eth0
+python3 -m mini.demo.arp_spoof --targets 10.0.2.10 --spoof 10.0.2.1 --iface att-eth0
